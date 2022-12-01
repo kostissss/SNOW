@@ -83,59 +83,11 @@ const WorkingModal = ({ isVisible, onClose }) => {
       _value: ethers.utils.parseEther("1000000000000000000000"),
     },
   });
-  const { runContractFunction: allowance } = useWeb3Contract({
-    abi: BUSDabi,
-    contractAddress: BUSDaddress,
-    functionName: "allowance",
-    params: {
-      _ownder: account,
-      _spender: presaleAddress,
-    },
-  });
-  async function checkAllowance() {
-    const allowance1 = await allowance().toString();
-
-    setApproved(allowance1);
-    return approve();
-  }
-
-  const { runContractFunction: checkApprovedFetch } = useWeb3Contract({
-    abi: BUSDabi, //imported from spotTraitsAbiFuji.json
-    contractAddress: BUSDaddress,
-    functionName: "approve",
-    params: {
-      _spender: presaleAddress,
-      _value: "10000000000000000000000000000000000",
-    },
-  });
-
-  const { runContractFunction: allowance1 } = useWeb3Contract({
-    abi: BUSDabi,
-    contractAddress: BUSDaddress,
-    functionName: "allowance",
-    params: {
-      _owner: account,
-      _spender: presaleAddress,
-    },
-  });
-
-  const handleSuccessfulApproval = async (tx) => {
-    await tx.wait(1);
-    changeUITrue();
-  };
 
   async function updateUI() {
     const balanceCallBUSD = (await balanceOfBUSD()).toString();
     setBalanceBUSD(balanceCallBUSD);
     console.log(selectedPerson.address);
-  }
-  async function approveOrBuy() {
-    if (allowance() != 0) {
-      await depositBUSD();
-    } else {
-      await approve();
-      await depositBUSD();
-    }
   }
 
   useEffect(() => {

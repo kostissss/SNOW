@@ -4,11 +4,10 @@ import styles from "../styles/Home.module.css";
 import Header from "../components/Header";
 
 import Head from "next/head";
-import { Input } from "web3uikit";
-import JoinPresale1 from "../components/JoinPresale1";
+
 import { useMoralis } from "react-moralis";
 import { useEffect, useState, Fragment } from "react";
-import { Modal } from "../components/Modal";
+
 import WorkingModal from "../components/WorkingModal";
 
 export default function Home() {
